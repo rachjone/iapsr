@@ -1,0 +1,12 @@
+Package: iapsr
+Type: Package
+Title: IAPS Analysis Functions
+Version: 0.1.0
+Author: Jonathan D. Trattner
+Maintainer: Jonathan D. Trattner <code@jdtrat.com>
+Description: Package useful for analyzing images as part of the International Affective Picture System.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+URL: https://github.com/jdtrat/iapsr
+BugReports: https://github.com/jdtrat/iapsr/issues
