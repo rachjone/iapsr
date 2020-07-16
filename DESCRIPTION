@@ -8,5 +8,12 @@ Description: Package useful for analyzing images as part of the International Af
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-URL: https://github.com/jdtrat/iapsr
-BugReports: https://github.com/jdtrat/iapsr/issues
+Depends: 
+    R (>= 2.10)
+Imports: 
+    tidyverse,
+    dplyr,
+    magrittr,
+    stringr,
+    readr
+RoxygenNote: 7.1.1
