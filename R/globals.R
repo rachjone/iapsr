@@ -1,1 +1,1 @@
-utils::globalVariables(c("picture", "%>%"))
+utils::globalVariables(c("picture", "%>%", ".", "value", "rating"))
