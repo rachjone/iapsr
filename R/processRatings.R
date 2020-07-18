@@ -1,5 +1,3 @@
-
-
 #' Read Ratings Data
 #'
 #' @param filePath The path to the ratings data file. Should be in single quotes.
@@ -127,8 +125,7 @@ getRating <- function(data) {
 #'  about the round, picture ID, question asked, and rating value. See description
 #'  for more information.
 #'@export
-#'
-#' @examples
+
 processRatingsData <- function(data) {
 
   picID <- getPicID(data)
