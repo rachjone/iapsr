@@ -19,5 +19,6 @@ Imports:
     base,
     forcats,
     tidyr,
-    purrr
+    purrr,
+    utils
 RoxygenNote: 7.1.1

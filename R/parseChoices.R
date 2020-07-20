@@ -1,6 +1,6 @@
 
 #Create a phase environment
-phase <- new.env(parent = emptyenv())
+phase <- base::new.env(parent = base::emptyenv())
 
 #Load Packages
 
@@ -56,20 +56,24 @@ getPhases <- function(data) {
 
   start1 <- data %>%
     dplyr::filter(stringr::str_detect(.$data, "Phase 1 Group")) %>%
-    dplyr::select(row)
+    dplyr::select(row) %>%
+    dplyr::pull(row)
 
   start2 <- data %>%
     dplyr::filter(stringr::str_detect(.$data, "Phase 2 Group")) %>%
-    dplyr::select(row)
+    dplyr::select(row) %>%
+    dplyr::pull(row)
 
   start3 <- data %>%
     dplyr::filter(stringr::str_detect(.$data, "Phase 3 Group")) %>%
-    dplyr::select(row)
+    dplyr::select(row) %>%
+    dplyr::pull(row)
 
   end3 <- data %>%
     dplyr::filter(stringr::str_detect(.$data, "CLEAR TRANSITION SCREEN")) %>%
-    dplyr::slice_tail() %>%
-    dplyr::select(row)
+    utils::tail(1) %>%
+    dplyr::select(row) %>%
+    dplyr::pull(row)
 
   phase$one <- data %>%
     dplyr::filter(dplyr::between(row, start1, start2 - 1)) %>%

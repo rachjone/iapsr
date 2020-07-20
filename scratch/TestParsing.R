@@ -21,7 +21,7 @@ rawDataRating <- readr::read_delim(file = 'IAPS_B.iaps_stream_rating.01.nosessio
 
 dataRating <- rawDataRating %>% select(data)
 
-rawDataChoice <- readr::read_delim(file = 'IAPS_B.iaps_choice.01.nosessionid.2020-07-16T11_18_33', delim = "\t",
+rawDataChoice <- readr::read_delim(file = 'scratch/IAPS_B.iaps_choice.01.nosessionid.2020-07-16T11_18_33', delim = "\t",
                                    col_names = c("time", "data"))
 
 dataChoice <- rawDataChoice %>% select(data)
@@ -94,7 +94,7 @@ ratings <- bind_cols(picID, question, submitRating) %>%
 
 
 
-
+getPhases(rawDataChoice)
 
 
 
@@ -228,6 +228,47 @@ getGroupRewardProbs <- function(phase) {
 }
 
 
+
+getPhases(rawDataChoice)
+
+data <- rawDataChoice %>%
+  dplyr::select(data) %>%
+  dplyr::mutate(row = dplyr::row_number())
+
+start1 <- data %>%
+  dplyr::filter(stringr::str_detect(.$data, "Phase 1 Group")) %>%
+  dplyr::select(row)
+
+start2 <- data %>%
+  dplyr::filter(stringr::str_detect(.$data, "Phase 2 Group")) %>%
+  dplyr::select(row)
+
+start3 <- data %>%
+  dplyr::filter(stringr::str_detect(.$data, "Phase 3 Group")) %>%
+  dplyr::select(row)
+
+data %>%
+  dplyr::filter(stringr::str_detect(.$data, "CLEAR TRANSITION SCREEN")) %>%
+  utils::tail(1) %>%
+  dplyr::select(row)
+
+
+end3 <- data %>%
+  dplyr::filter(stringr::str_detect(.$data, "CLEAR TRANSITION SCREEN")) %>%
+  dplyr::slice_tail() %>%
+  dplyr::select(row)
+
+phase$one <- data %>%
+  dplyr::filter(dplyr::between(row, start1, start2 - 1)) %>%
+  dplyr::mutate(phase = rep(1))
+
+phase$two <- data %>%
+  dplyr::filter(dplyr::between(row, start2, start3 - 1)) %>%
+  dplyr::mutate(phase = rep(2))
+
+phase$three <- data %>%
+  dplyr::filter(dplyr::between(row, start3, end3 - 1)) %>%
+  dplyr::mutate(phase = rep(3))
 
 
 
