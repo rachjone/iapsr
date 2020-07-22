@@ -284,3 +284,21 @@ phase3 %>% filter(str_detect(.$data, "SHOW: image")) %>%
            sep = " , ") %>%
   select(image) %>%
   mutate(image = stringr::str_remove(image, ".jpg"))
+
+
+
+
+rawDataChoice %>% processChoiceData()
+
+
+phase$one
+
+
+
+
+
+
+
+
+
+

@@ -254,12 +254,12 @@ getImageShown <- function(phaseData){
 
 processChoiceData <- function(data){
 
-  iapsr::getPhases(data)
+  getPhases(data)
   phases <- list(phase$one, phase$two, phase$three)
 
-  icons <- purrr::map_df(phases, ~iapsr::getIcons(.x))
-  choices <- purrr::map_df(phases, ~iapsr::getChoices(.x))
-  images <- purrr::map_df(phases, ~iapsr::getImageShown(.x))
+  icons <- purrr::map_df(phases, ~getIcons(.x))
+  choices <- purrr::map_df(phases, ~getChoices(.x))
+  images <- purrr::map_df(phases, ~getImageShown(.x))
 
 
   combined <- dplyr::full_join(icons, choices, by = c("phase", "round")) %>%
@@ -350,10 +350,10 @@ getGroupRewardProbs <- function(phaseData) {
 
 getGroupInfo <- function(data) {
 
-  iapsr::getPhases(data)
+  getPhases(data)
   phases <- list(phase$one, phase$two, phase$three)
 
-  output <- purrr::map_df(phases, ~iapsr::getGroupRewardProbs(.x))
+  output <- purrr::map_df(phases, ~getGroupRewardProbs(.x))
 
   return(output)
 
