@@ -2,15 +2,6 @@
 #Create a phase environment
 phase <- base::new.env(parent = base::emptyenv())
 
-#Load Packages
-
-library(dplyr)
-library(stringr)
-library(forcats)
-library(purrr)
-library(tidyr)
-library(readr)
-
 #' Read Choice Data
 #'
 #' @param filePath The path to the ratings data file. Should be in single quotes.
@@ -114,16 +105,16 @@ getPhases <- function(data) {
 getIcons <- function(phaseData, pivot = FALSE) {
 
   icons <- phaseData %>%
-    dplyr::filter(stringr::str_detect(.$data, "SHOW: OPTION SELECTION")) %>%
+    dplyr::filter(stringr::str_detect(data, "SHOW: OPTION SELECTION")) %>%
     tidyr::separate(col = data,
              into = c("show", "option", "selection", "icon", "order", "icon_group"),
              extra = "drop",
              sep = " ",
              remove = TRUE) %>%
     dplyr::select(icon_group, phase) %>%
-    dplyr::mutate(icon_group = stringr::str_remove_all(.$icon_group, "\"")) %>%
-    dplyr::mutate(icon_group = stringr::str_remove_all(.$icon_group, "\\{")) %>%
-    dplyr::mutate(icon_group = stringr::str_remove_all(.$icon_group, "\\}")) %>%
+    dplyr::mutate(icon_group = stringr::str_remove_all(icon_group, "\"")) %>%
+    dplyr::mutate(icon_group = stringr::str_remove_all(icon_group, "\\{")) %>%
+    dplyr::mutate(icon_group = stringr::str_remove_all(icon_group, "\\}")) %>%
     tidyr::separate(col = icon_group, into = c("order1", "icon1", "icon2"),
              extra = "warn",
              remove = FALSE,
@@ -132,7 +123,7 @@ getIcons <- function(phaseData, pivot = FALSE) {
              extra = "warn",
              remove = FALSE,
              sep = ",") %>%
-    dplyr::mutate(icon2 = stringr::str_remove_all(.$icon2, ",")) %>%
+    dplyr::mutate(icon2 = stringr::str_remove_all(icon2, ",")) %>%
     dplyr::select(icon1, icon2, phase) %>%
     dplyr::mutate(round = dplyr::row_number())
 

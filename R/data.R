@@ -13,3 +13,18 @@
 #' @source IAPS dataset
 #'
 "IAPS_id"
+
+
+#' Sample Data from the IAPS Choice Task
+#'
+#' A dataset containing the a sample output from the IAPS choice task.
+#'
+#' @format A data frame with 1863 rows and 2 columns
+#' \describe{
+#'   \item{time}{Time stamps for choice task.}
+#'   \item{data}{data from the choice task}
+#'   ...
+#' }
+#' @source Kishida Lab (researcher)
+"test"
+
