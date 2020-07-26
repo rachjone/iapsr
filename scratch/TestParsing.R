@@ -49,11 +49,6 @@ r1 %>% filter(str_detect(.$data, "Question")) %>% mutate(question = case_when(st
 
 
 
-
-
-
-
-
 question <- dataRating %>%
   filter(str_detect(.$data, "Question")) %>%
   transmute(question = if_else(condition = str_detect(.$data, "NEGATIVE"),
